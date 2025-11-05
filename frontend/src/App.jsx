@@ -1,4 +1,5 @@
 import React from 'react'
+import './index.css' 
 import { Route,Routes } from 'react-router-dom'
 import Placeorder from './pages/Placeorder.jsx'
 import Product from './pages/Product.jsx'
@@ -9,6 +10,7 @@ import Contact from './pages/Contact.jsx'
 import Cart from './pages/Cart.jsx'
 import Login from './pages/Login.jsx'
 import Orders from './pages/Orders.jsx'
+import Navbar from './components/Navbar.jsx'
 
 
 
@@ -16,6 +18,7 @@ import Orders from './pages/Orders.jsx'
 const App = () => {
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] xl:px-[20vw] 2xl:px-[25vw] py-4'>
+     <Navbar />
       <Routes>
         <Route path='/' element= {<Home/>} />
         <Route path='/collection' element= {<Collection/>} />
