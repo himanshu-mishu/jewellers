@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between py-5 font-medium">
       <img src={assets.logo} alt="logo" className="w-36" />
-      <ul className="sm:flex gap-5 text-sm text-gray-700 ">
+      <ul className="hidden sm:flex gap-5 text-sm text-gray-700 ">
         <NavLink to="/" className="flex flex-col items-center gap-1">
           <p>Home</p>
           <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
@@ -67,10 +67,10 @@ const Navbar = () => {
           <img src={assets.dropdown_icon} alt="drop_down" className="h-4 rotate-180" />
           <p>back</p>
         </div>
-        <NavLink to="/" className="p-3 border-t border-gray-200">Home</NavLink>
-        <NavLink to="/collection" className="p-3 border-t border-gray-200">Collection</NavLink>
-        <NavLink to="/about" className="p-3 border-t border-gray-200">About</NavLink>
-        <NavLink to="/contact" className="p-3 border-t border-gray-200">Contact</NavLink>
+        <NavLink onClick={()=>setVisible(false)} to="/" className="p-3 border-t border-gray-200">Home</NavLink>
+        <NavLink onClick={()=>setVisible(false)} to="/collection" className="p-3 border-t border-gray-200">Collection</NavLink>
+        <NavLink onClick={()=>setVisible(false)} to="/about" className="p-3 border-t border-gray-200">About</NavLink>
+        <NavLink onClick={()=>setVisible(false)} to="/contact" className="p-3 border-t border-gray-200">Contact</NavLink>
       </div>
      </div>
     </div>
