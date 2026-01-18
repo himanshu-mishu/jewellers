@@ -3,12 +3,13 @@ import { assets } from "../assets/assets";
 import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
-
-  const[visible,setVisible]=React.useState(false);
+  const [visible, setVisible] = React.useState(false);
 
   return (
     <div className="flex items-center justify-between py-5 font-medium">
-      <img src={assets.logo} alt="logo" className="w-36" />
+      <Link to="/">
+        <img src={assets.logo} alt="logo" className="w-36" />
+      </Link>
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700 ">
         <NavLink to="/" className="flex flex-col items-center gap-1">
           <p>Home</p>
@@ -58,21 +59,61 @@ const Navbar = () => {
             10
           </p>
         </Link>
-        <img onClick={()=>setVisible(true)} src={assets.menu_icon} alt="menu" className="w-5 cursor-pointer sm:hidden" />
+        <img
+          onClick={() => setVisible(true)}
+          src={assets.menu_icon}
+          alt="menu"
+          className="w-5 cursor-pointer sm:hidden"
+        />
       </div>
       {/* sidebarmenu for small screens */}
-<div className={`absolute top-0 right-0 bottom-0 bg-white transition-all ${visible ? 'w-full' : 'hidden'} `}>
-      <div className="flex flex-col text-gray-600">
-        <div onClick={()=>setVisible(false)} className="flex items-center gap-4 p-3 cursor-pointer">
-          <img src={assets.dropdown_icon} alt="drop_down" className="h-4 rotate-180" />
-          <p>back</p>
+      <div
+        className={`absolute top-0 right-0 bottom-0 bg-white transition-all ${
+          visible ? "w-full" : "hidden"
+        } `}
+      >
+        <div className="flex flex-col text-gray-600">
+          <div
+            onClick={() => setVisible(false)}
+            className="flex items-center gap-4 p-3 cursor-pointer"
+          >
+            <img
+              src={assets.dropdown_icon}
+              alt="drop_down"
+              className="h-4 rotate-180"
+            />
+            <p>back</p>
+          </div>
+          <NavLink
+            onClick={() => setVisible(false)}
+            to="/"
+            className="p-3 border-t border-gray-200"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            onClick={() => setVisible(false)}
+            to="/collection"
+            className="p-3 border-t border-gray-200"
+          >
+            Collection
+          </NavLink>
+          <NavLink
+            onClick={() => setVisible(false)}
+            to="/about"
+            className="p-3 border-t border-gray-200"
+          >
+            About
+          </NavLink>
+          <NavLink
+            onClick={() => setVisible(false)}
+            to="/contact"
+            className="p-3 border-t border-gray-200"
+          >
+            Contact
+          </NavLink>
         </div>
-        <NavLink onClick={()=>setVisible(false)} to="/" className="p-3 border-t border-gray-200">Home</NavLink>
-        <NavLink onClick={()=>setVisible(false)} to="/collection" className="p-3 border-t border-gray-200">Collection</NavLink>
-        <NavLink onClick={()=>setVisible(false)} to="/about" className="p-3 border-t border-gray-200">About</NavLink>
-        <NavLink onClick={()=>setVisible(false)} to="/contact" className="p-3 border-t border-gray-200">Contact</NavLink>
       </div>
-     </div>
     </div>
   );
 };
