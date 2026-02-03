@@ -5,7 +5,7 @@ import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
 
 const Collection = () => {
-  const { products } = useContext(ShopContext);
+  const { products,search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -28,7 +28,13 @@ const Collection = () => {
     }
   };
   const applyFilter = () => {
-    let productsCopy = products.slice();
+
+   let productsCopy = products.slice();
+   if(search && showSearch){
+    productsCopy = productsCopy.filter((item)=>item.name.toLowerCase().includes(search.toLowerCase())); 
+   }
+
+
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
         category.includes(item.category),
@@ -64,7 +70,7 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory, products]);
+  }, [category, subCategory, products, search, showSearch]);
 
   useEffect(() => {
     {
@@ -76,7 +82,7 @@ const Collection = () => {
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
       {/* Filter options */}
       <div className="min-w-60">
-        <p className="my-2 text-xl flex items-center cursor-pointer gap-2">
+        <p className="my-2 text-xl flex items-center cursor-pointer gap-2 text-gray-900">
           FILTERS
           <img
             onClick={() => setShowFilter(!showFilter)}
@@ -161,20 +167,33 @@ const Collection = () => {
         <div className="flex justify-between text-base sm:text-2xl mb-4">
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
           {/* product sort */}
-         <div className="relative inline-block">
+          <div className="relative inline-flex items-center">
   <select
     onChange={(e) => setSortType(e.target.value)}
-    className="border border-gray-300 px-3 py-2 pr-8 text-sm rounded appearance-none bg-white"
+    className="
+      appearance-none
+      border border-gray-300
+      bg-white
+      px-4 py-2 pr-10
+      text-sm
+      rounded-md
+      cursor-pointer
+      focus:outline-none
+      focus:ring-1 focus:ring-gray-400
+      hover:border-gray-400
+      transition
+    "
   >
     <option value="relevant">Sort by: Relevant</option>
-    <option value="low-high">Sort by: Low to High</option>
-    <option value="high-low">Sort by: High to Low</option>
+    <option value="low-high">Price: Low to High</option>
+    <option value="high-low">Price: High to Low</option>
   </select>
 
-  <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs">
+  <span className="pointer-events-none absolute right-3 text-gray-500 text-xs">
     ▼
   </span>
 </div>
+
         </div>
         {/* Map Products */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 gap-y-8">

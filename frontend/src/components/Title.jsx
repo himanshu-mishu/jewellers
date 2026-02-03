@@ -1,14 +1,17 @@
-import React from 'react'
+import React from "react";
 
-const Title = ({text1,text2}) => {
+const Title = ({ text1, text2 }) => {
   return (
-    <div className='inline-flex gap-2 items-center mb-3'>
-        <p className='text-gray-500'>{text1} <span className='text-gray-700 font-medium'>{text2}</span></p>
-      
-        <p className='w-8 sm:w-12 h-px  sm:h-0.5 bg-gray-700'></p>
-      
-    </div>
-  )
-}
+    <div className="inline-flex gap-2 items-center mb-3">
+      <p className="text-gray-500">
+        {text1}{" "}
+        <span className="text-gray-700 font-medium">{text2}</span>
+      </p>
 
-export default Title
+      {/* divider line – desktop only */}
+      <span className="hidden sm:block w-12 h-0.5 bg-gray-700"></span>
+    </div>
+  );
+};
+
+export default Title;
