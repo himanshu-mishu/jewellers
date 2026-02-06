@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [visible, setVisible] = React.useState(false);
   const { showSearch, setShowSearch } = useContext(ShopContext);
+  const navigate = useNavigate();
   return (
-<div className="relative z-50 flex items-center justify-between py-5 font-medium">
+    <div className="relative z-50 flex items-center justify-between py-5 font-medium">
       <Link to="/">
         <img src={assets.logo} alt="logo" className="w-36" />
       </Link>
@@ -34,7 +35,10 @@ const Navbar = () => {
           src={assets.search_icon}
           alt="search"
           className="w-5 cursor-pointer"
-          onClick={() => setShowSearch(!showSearch)}
+          onClick={() => {
+            setShowSearch(true);
+            navigate("/collection");
+          }}
         />
 
         <div className="group relative">
@@ -70,10 +74,10 @@ const Navbar = () => {
       </div>
       {/* sidebarmenu for small screens */}
       <div
-  className={`fixed inset-0 bg-white z-50 transform transition-transform duration-300 ${
-    visible ? "translate-x-0" : "translate-x-full"
-  }`}
->
+        className={`fixed inset-0 bg-white z-50 transform transition-transform duration-300 ${
+          visible ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
         <div className="flex flex-col text-gray-600">
           <div
             onClick={() => setVisible(false)}
