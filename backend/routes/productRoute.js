@@ -11,10 +11,10 @@ productRouter.post('/add',upload.fields([{name:"image1",maxCount:1},{name:"image
 productRouter.get('/list', listProduct);
 
 // Remove product route
-productRouter.delete('/remove', removeProduct);
+productRouter.post("/remove", removeProduct);
 
 // Single product info route
-productRouter.get('/:id', singleProduct);
+productRouter.post('/single',singleProduct);
 
 export default productRouter;
 
