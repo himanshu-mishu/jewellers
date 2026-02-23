@@ -15,8 +15,7 @@ const Login = ({ setToken }) => {
         password,
       });
       if (response.data.success) {
-        toast.success("Login successful ✅"); // ⭐ ADD THIS
-
+        toast.success("Login successful ✅");
         setToken(response.data.token);
       } else {
         toast.error(response.data.message);
