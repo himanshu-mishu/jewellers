@@ -12,24 +12,41 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // CHECKING IF USER EXISTS
+    // check user exists
     const user = await userModel.findOne({ email });
+
     if (!user) {
-      return res.status(400).json({ message: "User does not exist" });
+      return res.json({
+        success: false,
+        message: "User does not exist",
+      });
     }
 
-    // CHECKING IF PASSWORD IS CORRECT
+    // check password
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-    if (isPasswordCorrect) {
-      const token = createToken(user._id);
-      res.status(200).json({ message: "Login successful", token });
-    } else {
-      res.status(400).json({ message: "Invalid credentials" });
+    if (!isPasswordCorrect) {
+      return res.json({
+        success: false,
+        message: "Invalid credentials",
+      });
     }
+
+    // create token
+    const token = createToken(user._id);
+
+    res.json({
+      success: true,
+      message: "Login successful",
+      token,
+    });
+
   } catch (error) {
     console.error("Error in user login:", error);
-    res.status(500).json({ message: "Server error during login" });
+    res.json({
+      success: false,
+      message: "Server error during login",
+    });
   }
 };
 
@@ -64,10 +81,10 @@ const registerUser = async (req, res) => {
 
     const token = createToken(user._id);
 
-    res.status(201).json({ message: "User registered successfully", token });
+    res.status(201).json({success: true, message: "User registered successfully", token });
   } catch (error) {
     console.error("Error in user registration:", error);
-    res.status(500).json({ message: "Server error during registration" });
+    res.status(500).json({ success: false,message: "Server error during registration" });
   }
 };
 
