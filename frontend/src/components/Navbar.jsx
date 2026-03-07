@@ -4,9 +4,22 @@ import { Link, NavLink } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
-  const [visible, setVisble] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const {
+    setShowSearch,
+    navigate,
+    getCartCount,
+    token,
+    setToken,
+    setCartItems,
+  } = useContext(ShopContext);
 
-  const { setShowSearch, navigate, getCartCount } = useContext(ShopContext);
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    setCartItems({});
+    navigate("/login");
+  };
 
   return (
     <div className="flex items-center justify-between py-5 font-medium">
@@ -45,9 +58,7 @@ const Navbar = () => {
         />
         <div className="group relative">
           <img
-            onClick={() => {
-              navigate("/login");
-            }}
+            onClick={() => (token ? null : navigate("/login"))}
             className="w-5 cursor-pointer"
             src={assets.profile_icon}
             alt=""
@@ -65,7 +76,10 @@ const Navbar = () => {
               >
                 Orders
               </p>
-              <p onClick={() => {}} className="cursor-pointer hover:text-black">
+              <p
+                onClick={() => logout()}
+                className="cursor-pointer hover:text-black"
+              >
                 Logout
               </p>
             </div>
@@ -78,7 +92,7 @@ const Navbar = () => {
           </p>
         </Link>
         <img
-          onClick={() => setVisble(true)}
+          onClick={() => setVisible(true)}
           className="w-5 cursor-pointer sm:hidden"
           src={assets.menu_icon}
           alt=""
@@ -87,39 +101,38 @@ const Navbar = () => {
 
       {/* Sidebar Menu For Small Screens */}
       <div
-        className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? "w-full" : "w-0"}`}
-      >
+className={`fixed top-0 right-0 bottom-0 overflow-hidden bg-white z-50 transition-all ${visible ? "w-full" : "w-0"}`}      >
         <div className="flex flex-col text-gray-600">
           <div
-            onClick={() => setVisble(false)}
+            onClick={() => setVisible(false)}
             className="flex items-center gap-4 p-3 "
           >
             <img className="h-4 rotate-180" src={assets.dropdown_icon} alt="" />
             <p>Back</p>
           </div>
           <NavLink
-            onClick={() => setVisble(false)}
+            onClick={() => setVisible(false)}
             to="/"
             className="py-2 pl-6 border"
           >
             HOME
           </NavLink>
           <NavLink
-            onClick={() => setVisble(false)}
+            onClick={() => setVisible(false)}
             to="/collection"
             className="py-2 pl-6 border"
           >
             COLLECTION
           </NavLink>
           <NavLink
-            onClick={() => setVisble(false)}
+            onClick={() => setVisible(false)}
             to="/about"
             className="py-2 pl-6 border"
           >
             ABOUT
           </NavLink>
           <NavLink
-            onClick={() => setVisble(false)}
+            onClick={() => setVisible(false)}
             to="/contact"
             className="py-2 pl-6 border"
           >
