@@ -94,6 +94,7 @@ const Login = () => {
 
       {currentState === "Sign Up" && (
         <input
+          id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full px-3 py-2 border border-gray-800"
@@ -104,6 +105,7 @@ const Login = () => {
       )}
 
       <input
+        id="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="w-full px-3 py-2 border border-gray-800"
@@ -113,6 +115,7 @@ const Login = () => {
       />
 
       <input
+        id="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="w-full px-3 py-2 border border-gray-800"
