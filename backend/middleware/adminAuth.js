@@ -28,6 +28,7 @@ const adminAuth = (req, res, next) => {
 
     next();
   } catch (error) {
+    console.error("Admin Auth Error:", error);
     return res.json({
       success: false,
       message: "Invalid Token",
